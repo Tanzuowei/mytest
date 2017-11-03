@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>tblog</title>
+    <style type="text/css">
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+     <div id="ji">
+       <ul>
+         <li>1</li>
+         <li>2</li>
+         <li>3</li>
+       </ul>
+     </div>
+
+    </div>
+
+  </body>
+  <script type="text/javascript">
+  	
+console.dir(document.getElementById("ji"))
+   document.getElementById("ji").childNodes[1].onclick=function(ev){
+     var ev = ev || window.event;
+     var target = ev.target || ev.srcElement
+     alert(target.textContent)
+   }
+
+  	// var promise = new Promise((resolve, rejected)=>{
+   //        const a=1
+   //        const b=8
+  	// 	if(a < b){
+  	//       rejected("9")
+  	//       alert(0);
+  	// 	  throw "cuowu"
+          
+  	// 	}else{
+  	// 	   resolve(3)
+  	// 	}
+  	// })
+	function timeout(ms) {
+	return new Promise((resolve, reject) => {
+		resolve(33)
+	// setTimeout(resolve, ms, 'done');
+	console.log("提前")
+	});
+	}
+
+	timeout(0).then((value) => {
+	console.log(value);
+	});
+// var p1 = new Promise(function (resolve, reject) {
+//   setTimeout(() => resolve(new Error('fail lolo')), 3000)
+// })
+
+// var p2 = new Promise(function (resolve, reject) {
+//   console.log("zhengchang");
+//   setTimeout(() => resolve(p1), 1000)
+// })
+
+// p2
+//   .then(result => console.log(result))
+//   .catch(error => console.log(error))
+
+var user = {
+  kl:90,
+  op:function(){
+    (function(){
+    alert(this.kl)
+    })()
+}
+  }
+user.op()
+// this.ok = 778;
+//   user.aa=90;
+// (function(){
+//   var op = 88;
+//   (function (){
+//    alert(this.ok);
+//   })()
+// })()
+
+  </script>
+
+</html>

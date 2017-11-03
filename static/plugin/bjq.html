@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="target-densitydpi=device-dpi, width=360px, user-scalable=no">
+<head>
+  <title>编辑器</title>
+<style type="text/css">
+    body{padding:0px;margin:0px;}
+    a{ text-decoration:none;}
+    .l{margin:3px;float:left;  cursor:pointer; border:1px solid #D2D2D2;}
+    #iftxt{
+        width:100%;
+        position: relative;
+        }
+    #editor{width:100%;   height:100%;  background-color:#FFF;}
+    #wp{width:600px; height:300px; display:block;   overflow: hidden; padding:0px;margin:0px; border:1px groove #DBDBDB; background-color:#093;}
+    #txt{width:100%; height:100%; resize:none; margin:0; padding:0; border:none; }
+    #menu{ width:100%; height:30px; overflow:; box-sizing:border-box; border-bottom:1px groove #DBDBDB; background-color: #EBEBEB}
+    #TxtSize{ width:70px; top:20px;font-size:13px; position: relative; background-color: #DBDBDB; border:1px solid #CCC;}
+    #TxtFamily{ width:110px; top:20px; position: relative; z-index: 811213; display:block; background-color: #DBDBDB;   border:1px solid #CCC;}
+    #TxtColor{ width:105px; position: relative; top:20px; left:5px; border:1px solid red;}
+    #BjColor{width:105px;  position: relative; top:20px; left:5px; border:1px solid red;}
+    .ff{ width:100%; height:25px; padding-left:10px;}
+    .ft{ width:100%; height:25px; padding-left:10px;}
+    </style>
+</head>
+<body >
+<div id="wp" unselectable="on" >
+<div id="menu" unselectable="on"> <div  class="l" onclick="DisplayOn(TxtSize);" style="width:50px; height:20px;   background-image:url(images/select_size.gif);" unselectable="on"><div id="TxtSize" tabindex="-1" style=" display:none;" onmousemove="DisplayOn(this);" onblur="DisplayOver(this);" unselectable="on"></div> </div unselectable="on"><img class="l" style="" onclick="ToggleBold ();" src="images/bold.gif" unselectable="on"></img><img class="l" style="" onclick="ToggleItalic ();" src="images/italics.gif" unselectable="on"></img><img class="l" style=" " onclick="Line_Through();" src="images/strikethrough.gif" unselectable="on"></img><img class="l" style="" onclick="UnderLine();" src="images/underline.gif" unselectable="on"></img><div class="l" onclick="DisplayOn(TxtFamily);" style="width:84px; height:20px;background-image:url(images/select_font.gif);   left:185px;" unselectable="on"><div id="TxtFamily" tabindex="-1" onmousemove="DisplayOn(this);" onblur="DisplayOver(this);" style="display:none; " unselectable="on"></div> </div> <img class="l"style="  " onclick="Chtp();" src="images/insert_hyperlink.gif" unselectable="on"></img><img class="l" style=";"onclick="Htp();" src="images/insert_hyperlink_on.gif" unselectable="on"></img><img class="l" style=""onclick="JustifyLeft();" src="images/justify_left.gif" unselectable="on" ></img><img class="l"style="" onclick="JustifyCenter();"  src="images/justify_center.gif" unselectable="on"></img> <img class="l" style="" onclick="JustifyRight();"src="images/justify_right.gif" unselectable="on"></img>   <div  class="l" style="width:20px; height:20px; background-image:url(images/backcolor.gif);" onclick="DisplayOn(BjColor);" unselectable="on" ><div id="BjColor" tabindex="-1"  onmousemove="DisplayOn(this);" onblur="DisplayOver(this);" style=" display:none;" unselectable="on"></div></div><div  class="l" style="width:20px;  height:20px; background-image:url(images/forecolor.gif);" onclick="DisplayOn(TxtColor);" unselectable="on"><div id="TxtColor" tabindex="-1" style="display:none; " onmousemove="DisplayOn(this);" onblur="DisplayOver(this);" unselectable="on"></div></div><img class="l"  style="" onclick="GetHtml();" src="images/view_source.gif" unselectable="on"></img>   <img class="l"  style="" width="20" height="20" onclick="ReplaceStr();" src="images/gs.gif" unselectable="on"></img> </div>  <div id="if" style="width:100%;  height:270px; margin:0px;display:block;" ><iframe id="editor" frameborder="0"; style="display:block;"  ></iframe> <textarea id="txt" contentEditable = "true" designMode = "on" style="display:none;" ></textarea> </div> <table id="tc" unselectable="on" cellpadding="0" cellspacing="0" style="width:350px; margin:0px;display:none; z-index:20001; padding:0px;position:absolute;top:90px;left:100px; background-color:#FFF;  border:1px solid #DBDBDB;"> <tr  style=" width:100% height:25px;"><td colspan="3" style="width:100%; height:20px; background-color:#DBDBDB; line-height:20px;">添加超链接</td></tr><tr height="30"><td >输入标题:</td> <td colspan="2"><input type="text" style="width:255px;" id="hbt"  value="" /></td>  </tr>  <tr height="30"> <td >输入链接:</td> <td colspan="2"><input type="text" style="width:255px;" id="htp"  value="" /></td></tr> <tr ><td colspan="3" align="right"><button onclick="Alink(hbt.value,htp.value);" >确&nbsp;定</button>&nbsp;<button onclick="qx();" unselectable="on">取&nbsp;消</button></td> </tr></table> </div> <button class="l"onclick="Getifd();">代码输出</button><div id="zzz" class="l" style="display:;" unselectable="on"></div>
+    </div>
+
+</body>
+  <script type="text/javascript">
+function myBrowser(){
+     var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1;
+     if (isOpera) {
+         return "Opera"
+     }; //判断是否Opera浏览器
+    if (userAgent.indexOf("Firefox") > -1) {
+         return "FF";
+     } //判断是否Firefox浏览器
+    if (userAgent.indexOf("Chrome") > -1){
+   return "Chrome";
+  }
+     if (userAgent.indexOf("Safari") > -1) {
+         return "Safari";
+     } //判断是否Safari浏览器
+    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+         return "IE";
+     }; //判断是否IE浏览器
+}
+
+function isIe(){
+   return ("ActiveXObject" in window);
+}
+
+//以下是调用上面的函数
+var mb = myBrowser();
+
+
+        var editorDoc;
+
+       window.onload=function (){
+		   
+		   ( function () {////GetEditor
+            var editor = document.getElementById ("editor");
+			
+            if (editor.contentDocument){
+                editorDoc = editor.contentDocument;
+				editorDoc.getElementsByTagName('body')[0].id="HtmlEditor";
+				
+				}
+            else{
+                editorDoc = editor.contentWindow.document;
+				
+				editorDoc.getElementsByTagName('body')[0].id="HtmlEditor";
+			}
+            var editorBody = editorDoc.body;
+            if ('spellcheck' in editorBody) {    
+                editorBody.spellcheck = false;
+            }
+
+            if ('contentEditable' in editorBody) {
+                editorBody.contentEditable = true;
+            }
+            else {
+                if ('designMode' in editorDoc) {
+					if('FF'==mm){
+						editorDoc.designMode = "false"; 
+					}else{
+                    editorDoc.designMode = "on"; 
+					}
+                }
+            }
+        })();
+	   }
+
+			function GetDivName(div){
+				return document.getElementById(div);
+				}
+				///
+var setstart=0,setend=0;
+function getselection(){
+	
+	
+	var txt,sel;
+//	var userSelection;
+//if (window.getSelection) { //现代浏览器
+//    userSelection = window.getSelection();
+//} else if (document.selection) { //IE浏览器 考虑到Opera，应该放在后面
+//    userSelection = document.selection.createRange();
+//}
+          // 获取选择的文字extractContents()
+			if ("IE" == mb||isIe()==true) {
+				// sel = editorDoc.getSelection(); 
+				if("IE" == mb){
+					//console.log(editorDoc.selection.createRange());
+					sel=editorDoc.body.createTextRange();
+					//range = sel.getRangeAt(0);
+				}else{
+					//sel=editorDoc.body.createTextRange();
+					sel = editorDoc.getSelection();
+					  txt = sel.getRangeAt(0).cloneContents().textContent;
+					range = sel.getRangeAt(0);
+					alert(txt);
+					setstart=range.startOffset;
+					setend=range.endOffset;
+					
+					//alert(sel.anchorOffset+'::::'+range.startOffset );
+					//console.log("kkk:"+range.startContainer);
+					//console.log(range.commonAncestorContainer);
+					// 
+				}        		
+			}else{ 
+				sel = editorDoc.getSelection(); 
+				txt = sel.getRangeAt(0).extractContents().textContent;
+				range = sel.getRangeAt(0);
+				setstart=range.startOffset;
+				setend=range.endOffset;
+				alert(sel.baseNode);
+				alert(range.commonAncestorContainer);
+			}
+			
+		//setend=sel.focusOffset;
+	
+		//setstart=sel.anchorOffset;
+		
+		//alert(txt);
+		//alert(sel);
+            // 选择范围
+	//		range = document.createRange();
+	//range.setStart(startNode,startOffset);
+	//range.setEnd(endNode,endOffset);
+	//var startRangeNode = range.startContainer;
+	//alert(startRangeNode);
+                 // 删除被选择的内容 
+              //  range.deleteContents();
+			  // alert(txt);
+                return txt;
+        }
+
+function aaa(){
+		return 	getselection();
+}
+
+
+function CreateLink(title,values){
+	var txt;
+if ("IE" == mb||isIe()==true) {
+	
+	var ran=editorDoc.body.createTextRange();
+	
+	//var rag=editorDoc.createRange();//.getRangeAt(0);
+//	if(setstart==undefined&&setend==undefined){
+//		ran.select();
+//		ran.setEndPoint('StartToStart', ran);
+//		setstart=ran.text.length;
+//		setend=ran.text.length; 
+//		ran.moveStart("character",ran.text.length);
+//　		ran.moveEnd("character",ran.text.length);
+//　		ran.collapse(true);
+//}else{
+//		ran.moveStart("character",0);
+//　		ran.moveEnd("character",0);
+//　		ran.collapse();
+//}
+		//txt=getselection();
+//	alert(editorDoc.body);
+		ran.moveEnd("character",0);
+		ran.moveStart("character",0);
+　		ran.collapse(true);
+		ran.moveEnd("character",setend);
+ 　		ran.moveStart("character",setstart);
+　		
+		//ran.collapse(false);
+		console.log(ran);
+		//ran.text;
+		alert(setstart+"::"+setend);
+		ran.select(); 
+		alert("ran_txt:: "+ran.text);
+			if(ran.text.length>0){
+				title=ran.text;//ran.text;
+			}else if(title==""||title==null){
+				title=values;
+			}
+			var a='<a href=http://'+values+'  target="_blank"/>'+title+'</a>';
+			editorDoc.focus();
+             ran.pasteHTML(a);
+					//ran.collapse(false);
+					//ran.select();
+			// setFocus();
+			
+       }else{
+
+              txt=this.getselection();
+             if(txt.length>0){
+				title=txt;
+				//alert("title:"+title.length>0);
+			}else if(title==""||title==null){
+				alert("title=0");
+				title=values;
+			}
+				// 创建新的元素
+				if(title==""&&values==""){
+					alert("error");
+				}else{
+				var span = document.createElement("span"); 
+                var a = document.createElement("a");
+             // 设置 spans 内容
+                a.href="http://"+values;
+                a.innerHTML = title;
+             // 在被选择的位置添加有style的元素
+			 	span.appendChild(a);
+            	range.insertNode(span);
+				console.log(editorDoc.body.toString().length);
+			 	editorDoc.body.innerHTML+= "&nbsp;";
+			 	//setFocus();
+				}
+	   }
+                
+            }
+			
+function setAtrributes(style,values){
+				var txt = this.getselection();
+	  		// 创建新的元素 
+				var spans = editorDoc.document.createElement("span");
+			//设置样式 
+	   			spans.style[style]=values;
+	  		 // 设置 spans 内容
+	   			spans.innerHTML = txt;
+	   		 // 在被选择的位置添加有style的元素
+			  
+			range.insertNode(spans);	
+}
+
+
+		function Alink(value,values){
+			var div = GetDivName('tc');
+			div.style.display='none';
+				CreateLink(value,values);
+			
+		}
+			
+		function Getifd(){//
+				AddTxt(editorDoc);						
+		}
+        function ToggleBold () {//加粗
+            editorDoc.execCommand ('bold', true, null);
+			//SetCusorPos();
+        }
+        function ToggleItalic () {//斜体字
+            editorDoc.execCommand ('italic', false, null);
+        }
+		function UnderLine(){//下划线
+		editorDoc.execCommand('Underline');
+		}  
+		function Line_Through(){//中划线
+			editorDoc.execCommand('StrikeThrough');
+		}
+		function Ol(){//无序序号
+			editorDoc.execCommand('InsertOrderedList'); 
+		}
+		function Ul(){//有序序号
+			editorDoc.execCommand('InsertUnorderedList'); 
+		}
+		function Zl(){//空心序号
+			editorDoc.execCommand('Indent'); 
+		}
+		function FontFamily(value){//字体
+			editorDoc.execCommand('FontName',false,value); 
+		}
+		function FontSizes(div){//字体大小
+			var value = div.innerHTML;
+			editorDoc.execCommand('FontSize',false,value); 
+		}
+		function ForeColor(value){//指定前景色
+			editorDoc.execCommand('ForeColor',false,value);
+		}
+		function BackColor(value){//指定背景色
+			editorDoc.execCommand('BackColor',false,value);
+		}
+		function tanchuang(div){
+			var div = GetDivName(div);
+			div.style.display='';
+		}
+		function tj(){
+			var htp = GetDivName('htp');
+			var  tc = GetDivName('tc');
+			tc.style.display='none';
+			Htp(htp.value);
+			///htp.value='http://';
+		}
+		function qx(){
+			var htp = GetDivName('htp');
+			var  tc = GetDivName('tc');
+			tc.style.display='none';
+			htp.value='http://';
+			
+		}
+		function Htp(value){//添加超链接
+		
+			tanchuang('tc');
+			if ("IE" == mb||isIe()==true) {
+				aaa();
+			 }
+	/*		getselection();
+			tanchuang('mak');
+		  if ("IE" == mb||isIe()==true) {
+			 alert('ie');
+			 editorDoc.execCommand('CreateLink',false);
+		 }else{}*/
+		}
+		function JustifyLeft(){
+			editorDoc.execCommand('JustifyLeft'); 
+		}
+		function JustifyCenter(){
+			editorDoc.execCommand('JustifyCenter'); 
+		} 
+		function JustifyRight(){
+			editorDoc.execCommand('JustifyRight'); 
+		}
+		function Chtp(){
+			editorDoc.execCommand('Unlink'); 
+		}
+		function OverWrite(){
+			editorDoc.execCommand('OverWrite'); 
+		} 
+		function RemoveFormat(){
+			var txt = editorDoc.execCommand("selectAll");
+			editorDoc.execCommand('RemoveFormat',false,txt);	
+		}
+		///////////////////////ReplaceStr(txt);
+
+		function AddTxt(dv){
+			var div = GetDivName('zzz');
+			var txt = dv.body.innerHTML;
+			div.innerHTML=txt;
+			//dv.body.innerHTML = div.innerHTML;
+		}
+		function GetHtml(){
+			var div = GetDivName('txt');
+			var div2 = GetDivName('editor');
+			if(div.style.display=='none'&& div2.style.display=='block'){
+				div.style.display='block';
+				div2.style.display='none';
+				div.value=editorDoc.body.innerHTML;;
+			}else{
+				div.style.display='none';
+				div2.style.display='block';
+				editorDoc.body.innerHTML = div.value;
+			}	
+		}
+		function SetFontType(value){
+			var txt = value.innerHTML;
+			FontFamily(txt);
+		}
+		
+		function SetForeColor(div){
+			
+			ForeColor(div);
+		}
+		function SetBackColor(div){
+			BackColor(div);
+		}
+		function DisplayOn(div){
+			div.style.display='';
+			div.focus();
+			
+		}
+		function DisplayOver(div1){
+			 div1.style.display="none";
+		}
+		function SeleteOn(div){
+			div.style.border="1px solid red";
+			
+		}
+		function SeleteOver(div){
+			div.style.border="";
+		}
+	
+		function getbody(){var str = editorDoc.body.innerHTML;if(!str){return;}else{ReplaceStr();}}
+		function ReplaceStr(){
+		var str = editorDoc.body.innerHTML;
+		str = str.replace(/<span([^>])*>(&nbsp;)*\s*<\/span>/gi, '');
+	    str = str.replace(/<span[^>]*>/gi, '');
+	    str = str.replace(/<\/span[^>]*>/gi, '');
+	    str = str.replace(/<p([^>])*>(&nbsp;)*\s*<\/p>/gi, '<p>');
+	    str = str.replace(/<p[^>]*>/gi, '<p>');
+	    str = str.replace(/<\/p[^>]*>/gi, '</p>');
+	    str = str.replace(/<h([^>])[0-9]>(&nbsp;)*\s*<\/h>/gi, '');
+	    str = str.replace(/<h[^>][0-9]>/gi, '');
+	    str = str.replace(/<\/h[^>][0-9]>/gi, ''); 
+		str = str.replace (/<B [^>]*>/ig, '<b>');
+		
+		// var repl_i1 = /<I[^>]*>/ig;
+		// str = str.replace (repl_i1, '<i>');
+		
+		str = str.replace (/<DIV[^>]*>/ig, '');
+		str = str.replace (/<\/DIV>/gi, '');
+		str = str.replace (/<[\/\w?]+:[^>]*>/ig, '');
+		str = str.replace (/(&nbsp;){2,}/ig, '&nbsp;');
+		str = str.replace (/<STRONG>/ig, '');
+		str = str.replace (/<\/STRONG>/ig, '');
+		str = str.replace (/<TT>/ig, '');
+		str = str.replace (/<\/TT>/ig, '');
+		str = str.replace (/<FONT [^>]*>/ig, '');
+		str = str.replace (/<\/FONT>/ig, '');
+		str = str.replace (/STYLE=\"[^\"]*\"/ig, '');
+		str = str.replace(/<([\w]+) class=([^ |>]*)([^>]*)/gi, '<$1$3');
+  	    str = str.replace(/<([\w]+) style="([^"]*)"([^>]*)/gi, '<$1$3'); 
+		str = str.replace(/width=([^ |>]*)([^>]*)/gi, '');
+	    str = str.replace(/classname=([^ |>]*)([^>]*)/gi, '');
+	    str = str.replace(/align=([^ |>]*)([^>]*)/gi, '');
+	    str = str.replace(/valign=([^ |>]*)([^>]*)/gi, '');
+	    str = str.replace(/<\\?\??xml[^>]>/gi, '');
+	    str = str.replace(/<\/?\w+:[^>]*>/gi, '');
+	    str = str.replace(/<st1:.*?>/gi, '');
+	    str = str.replace(/o:/gi, ''); 
+	    
+	    str = str.replace(/<!--([^>])*>(&nbsp;)*\s*<\/-->/gi, '');
+   		str = str.replace(/<!--[^>]*>/gi, '');
+   		str = str.replace(/<\/--[^>]*>/gi, '');
+		editorDoc.body.innerHTML = str;
+		}
+		
+//字体样式
+function FontType(){
+	
+	var TxtFamily = document.getElementById('TxtFamily');
+	//alert(TxtFamily);
+	var FONTTYPE = new Array('Arial','Black','Gadget','sans-serif','宋体','楷体','黑体','新宋体');
+	
+	var output = "";
+	//output += '<select onchange="SetFontType();" style="font-size:15px; " id="FontType"  >'; value='+FONTTYPE[i]+'
+	for(var i=0;i<FONTTYPE.length;i++){
+		output+='<div id="ff'+i+'" class="ff" onmousemove="SeleteOn(this);" onmouseout="SeleteOver(this);" onclick="SetFontType(this)" style="  width:86%; height:20px; font-size:14px; line-height:20px; font-family:'+FONTTYPE[i]+'" unselectable="on">'+FONTTYPE[i]+'</div>';
+	}
+	//output+='</select>';
+	TxtFamily.innerHTML=output;
+}
+//字体大小
+function Fonts(){
+	var TxtSize = document.getElementById('TxtSize');
+	var FONTSIZE = new Array(
+	'1',
+	'2',
+	'3',
+	'4',
+	'5',
+	'6',
+	'7'
+	);
+	
+	var output = "";
+	//output += '<select  onchange="SetFontSize();" style="font-size:15px;" id="FontSize"  >';
+	for(var i=0;i<FONTSIZE.length;i++){
+		output+='<div  id="fl'+i+'" onmousemove="SeleteOn(this);" onmouseout="SeleteOver(this);" style=" width:80%; height:25px; font-size:27px; line-height:25px;cursor:pointer;" unselectable="on">H<span id="ft'+i+'" class="ft"  onclick="FontSizes(this);" unselectable="on">'+FONTSIZE[i]+'</span></div>';
+		
+	}
+	//output+='</select>';
+	TxtSize.innerHTML=output;
+}
+//给出颜色选项
+var COLORS = new Array(
+		"#000000","#993300","#333300","#003300","#003366","#000080",
+		"#333399","#333333","#800000","#FF6600","#808000","#008000",
+		"#008080","#0000FF","#666699","#808080","#FF0000","#FF9900",
+		"#99CC00","#339966","#33CCCC","#3366FF","#800080","#999999",
+		"#FF00FF","#FFCC00","#FFFF00","#00FF00","#00CCFF","#993366",
+		"#C0C0C0","#FF99CC","#FFCC99","#FFFF99","#CCFFCC","#CCFFFF",
+		"#99CCFF","#666699","#777777","#999999","#EEEEEE","#FFFFFF"	
+	);
+function Colors(){
+	var div = document.getElementById('TxtColor');	 
+	var output="";// padding-top:50
+	output+='<table style="display:;" border="0" cellpadding="0" cellspacing="0"  unselectable="on"><tr>';
+		for(var i=0;i<COLORS.length;i++){
+			output+=' <td style=" width:20px; height:20px; padding:1px;"><div   class="COLORS'+i+'" onclick="SetForeColor(\'' + COLORS[i] + '\');" style="width:15px; height:15px; cursor:pointer; color:#FFF;font-size:9px;  background-color:'+COLORS[i]+'; text-align:center;" unselectable="on"></div></td> ';
+			if(((i+1) % Math.round(Math.sqrt(COLORS.length))) == 0){
+			output+="</tr><tr>";	
+			}
+		}
+	output+="</tr></table>";
+	div.innerHTML = output;
+}
+function Colorss(){
+	var div = document.getElementById('BjColor');	 
+	var output="";// padding-top:50
+	output+='<table style=" display:;" border="0" cellpadding="0" cellspacing="0" unselectable="on"><tr>';
+		for(var i=0;i<COLORS.length;i++){
+			output+=' <td style="width:20px; height:20px; padding:1px;"><div  class="COLORS'+i+'" onclick="SetBackColor(\'' + COLORS[i] + '\');" style="width:15px; height:15px; cursor:pointer; color:#FFF;font-size:9px;  background-color:'+COLORS[i]+'; text-align:center;" unselectable="on"></div></td> ';
+			if(((i+1) % Math.round(Math.sqrt(COLORS.length))) == 0){
+			output+="</tr><tr>";	
+			}
+		}
+	output+="</tr></table>";
+	div.innerHTML = output;
+}
+FontType();Fonts();Colors();Colorss();
+			
+    </script>
+</html>
