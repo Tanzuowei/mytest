@@ -1,21 +1,20 @@
 <template>
   <div>
     <div class="users">
-    <div class="main-top clearfix">
-    	<div class="mian-user">
-    		<a class="user-head" href="javascript:;"><img src="http://upload.jianshu.io/users/upload_avatars/2385632/b21daade-f9b2-4e97-9b11-15f97a38d11c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"></a>
-	        <div class="user-title">
-	        	<a href="javascript:;">{{item.users_name}} <i class="fa fa-mars" aria-hidden="true"></i></a>
-	        </div>
-	        <div class="autograph">个性签名：你来了，我就是最幸福的</div>
-    	</div>
-    </div>
-    <div class="main-bottom clearfix">
-      <div class="info-menu"><a href="javascript:;" @click="setpath('userinfo')">主页</a> <a href="javascript:;" @click="setpath('userarticle')">列表</a></div>
-    	<transition name="fade">
-     <router-view></router-view>
-  </transition>
-    </div>
+        <div class="head-img">
+          <img src="http://upload.jianshu.io/users/upload_avatars/2385632/b21daade-f9b2-4e97-9b11-15f97a38d11c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
+        </div>
+        <div class="user-info">
+          <h3>名字：谭作维</h3>
+          <p>爱好：跑步、羽毛球、玩王者</p>
+          <div class="user-git"><a href="https://github.com/Tanzuowwei/mytest"><i class="fa fa-github" aria-hidden="true"></i> <span>我的GitHub</span></a></div>
+        </div>
+        <div class="user-recommend">
+          <h3>学习经历</h3>
+          <p>2016年毕业</p>
+           <h3>现在从事的职业</h3>
+          <p>web前端</p>
+        </div>
   </div>
   </div>
 </template>
@@ -31,7 +30,6 @@ export default {
     }
   },
   created(){
-    // console.log(this.isNumber(parseInt("ggg")))
     if(!this.isLogin && !this.isNumber(parseInt(this.$route.params.id))){
       let that = this
       setTimeout(function(){that.$router.replace({name: 'login'})},10)
@@ -71,73 +69,80 @@ export default {
 
 <style>
 .users{
-  margin:20px auto;
-  max-width: 1000px;
+ max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  width: 100%;
+  background: #fff;
 }
 .main-top{
-	/*height:160px;*/
-	/*width:100%;*/
 	padding:60px 10px;
 	background: #ccc;
 }
-.mian-user{
-  	position: relative;
-  	padding-left: 80px;
-  	max-width:300px;
-  	overflow: hidden;
-  	min-height: 70px;
-  	margin:0 auto;
+.head-img{
+  padding:20px 0;
+  text-align: center;
 }
-.user-head{
-	position: absolute;
-	left: 0px;
-}
-
-.user-head img{
-	width:70px;
-	height:70px;
-	border-radius: 50%;
+.head-img img{
+  border-radius: 50%;
   -webkit-border-radius: 50%;
 }
-.user-title{
-  margin-top:10px;
-  margin-bottom: 5px;
-}
-.user-title a{
-	font-size: 15px;
-	font-weight: 700;
-	color:#333;
-}
-.autograph{
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #3f3f3f;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sex-area{
-  font-size: 14px;
-  margin:0 auto;
-  margin-top:10px;
-  width:170px;
-}
-
-.info-menu{
-  background: #fff;
+.user-git{
+  position: relative;
+  z-index: 999;
+  padding:20px 0;
   text-align: center;
-  overflow: hidden;
-  border-bottom: 1px solid #eaeaea;
-  -moz-box-shadow: 0px 2px 0px #888888; 
-  box-shadow: 0px 2px 0px #888888;
+   /*line-height: 100%*/
 }
-.info-menu a{
+.user-git a{
   display: inline-block;
-  padding:10px 16px;
+  padding:10px 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border:1px solid #5eb4f0;
+  /*margin:0 5px;*/
+  background: #fff;
+  color:#5eb4f0;
+  transition: all 2s;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s;
+}
+.user-git a i{
+  font-size: 26px;
+  vertical-align: middle;
+  color:#333;
+}
+.user-git a span{
+  vertical-align: middle;
+}
+.user-git a:hover{
   color:#888;
-  /*margin:0 4px;*/
+  border:1px solid #fff;
+}
+.user-info{
+  text-align: center;
+}
+.user-info h3{
+  font-weight: normal;
+  margin:8px auto;
+  color:#555;
+}
+.user-info p{
+  margin:5px auto;
+  color:#999;
+  font-size: 14px;
+}
+.user-recommend{
+  padding:20px;
+}
+.user-recommend h3{
+  font-size: 20px;
+  font-weight: normal;
+  border-left: 4px solid #0095ea;
+  padding-left:10px 
+}
+.user-recommend p{
+  padding-left:16px 
 }
 </style>

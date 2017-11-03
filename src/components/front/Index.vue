@@ -2,7 +2,7 @@
   <div class="index">
     <canvas id="c"></canvas>
    <div class="index-title">Wdy Blog</div>
-   <div class="index-item"><a href="https://github.com/Tanzuowwei/mytest">我的GitHub</a><a href="/blog">进入博客</a></div>
+   <div class="index-item"><a href="https://github.com/Tanzuowwei/mytest"><i class="fa fa-github" aria-hidden="true"></i> <span>我的GitHub</span></a><a href="/blog"><i class="fa fa-eye" aria-hidden="true"></i> <span>进入博客</span></a></div>
   </div>
 </template>
 
@@ -107,9 +107,21 @@ anim();
   margin:0 5px;
   background: #fff;
   color:#5eb4f0;
+  transition: all 2s;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s;
+}
+.index-item a i{
+  font-size: 26px;
+  vertical-align: middle;
+  color:#333;
+}
+.index-item a span{
+  vertical-align: middle;
 }
 .index-item a:hover{
-  color:blue;
+  color:#888;
+  border:1px solid #fff;
 }
 canvas{
   position:absolute;
