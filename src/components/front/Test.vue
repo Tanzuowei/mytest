@@ -19,13 +19,18 @@
       </div>
     </form>
     </div>-->
+   <alist>
+    <slot>
+    只有在没有要分发的内容时才会显示。
+  </slot>
+</alist>
     <div class="comments-text">目前还未添加</div>
   </div> 
 </div>
 </template>
 
 <script>
-
+import alist from "./AAd.vue";
 export default {
   data () {
     return {
@@ -33,7 +38,7 @@ export default {
     }
   },
   components: {
-
+    alist
   },
   created () {
   },

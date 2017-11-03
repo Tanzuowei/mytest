@@ -1,11 +1,13 @@
-const express = require('express')
-const register = require('../../controller/register')
+// const Sequelize = require('sequelize')
+// const sequelize = require('../mysql/sql')
 
-const registerRouter = express.Router()
-
-registerRouter
-        .post('/register', async(req, res)=>{ 
-		     const result = await register.add_register(req, res)
-		     res.json(result)
-	    })
-module.exports = registerRouter
+// const register = sequelize.define('wdy_users', {
+//     id: {
+//       type: Sequelize.INTEGER,
+//       primaryKey: true
+//     },
+//     users_name: Sequelize.STRING(30),
+//     password:  Sequelize.STRING(30),
+//     reg_time: Sequelize.INTEGER(10),
+// })
+// module.exports = register

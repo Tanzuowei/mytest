@@ -2,7 +2,7 @@
   <li class="news-item clearfix" v-if="items">
     <a class="post-item" :href="'/article/'+items.id">
     <div class="item-top">
-      <a :href="'/user/'+items.users_id" class="head-url"><img src="http://upload.jianshu.io/users/upload_avatars/2385632/b21daade-f9b2-4e97-9b11-15f97a38d11c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"></a>
+      <a :href="'/user/'+items.users_id" class="head-url"><img src="/static/images/mypic.jpg"></a>
       <a :href="'/user/'+items.users_id" class="user-name">{{items.users_name}}</a><span>{{items.addtime}}</span>
     </div>
     <div class="item-content">

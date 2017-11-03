@@ -3,7 +3,7 @@
 	<div class="goBack"><i class="fa fa-angle-left" @click="goBack"></i> <span>超级登录</span></div>
   <div class="login">
   	<div class="login-top">
-  		<img src="../../assets/images/logo.png">
+  		<img src="/static/images/mypic.jpg">
   	</div>
   	<div class="formLogin">
   		<div><input type="text" v-model="userinfo.user" placeholder="请输入账户" name="" value=""></div>
@@ -17,8 +17,7 @@
 </template>
 
 <script>
-// import mod from "@/components/front/Item.vue";
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import { check_login } from "../../api/login"
 export default {
   data () {
@@ -30,24 +29,31 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  created () {
+  mounted () {
+    // alert(this.isLogin)
+    if(this.isLogin){
+      this.$router.replace({name: 'logout'})
+    } 
+  },
+ computed: {
+   ...mapGetters(['isLogin','userInfo'])
   },
   methods:{
     goBack (){
-      this.$router.replace({name: 'list'})
-      // window.history.go(-1);
+      // this.$router.replace({name: 'blog'})
+      window.history.go(-1);
     },
+   
     //登录
     async login () {
       const data = await check_login(this.userinfo)
-      // console.log(data)
       this.callback(data)
     },
     //登陆后的回调
     callback({code,data,message}){
       if(code==1){
         this.$store.commit('SET_LOGIN',data)
-        this.$router.push('/list')
+        this.$router.push('/blog')
       }else{
         alert("错了哦");
         // this.$store.dispatch('setShowWarn',message)
@@ -90,10 +96,12 @@ export default {
   text-align: center;
 }
 .login .login-top img{
-  width:50px;
+  width:100px;
   height:auto;
   margin:0 auto;
   padding-top:40px;
+  -webkit-border-radius:50%;
+  border-radius: 50%;
 }
 
 .formLogin{

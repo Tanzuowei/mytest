@@ -37,12 +37,15 @@ export default {
     }
   },
   mounted() {
+    if(!this.isLogin){
+      this.$router.replace({name: 'login'})
+    }
     console.log(this.userInfo)
     this.username = this.userInfo.users_name
     this.usersid = this.userInfo.id
   },
   computed:{
-     ...mapGetters(['userInfo'])
+     ...mapGetters(['isLogin','userInfo'])
   },
   methods:{
     goBack (){

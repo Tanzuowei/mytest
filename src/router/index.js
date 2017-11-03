@@ -11,7 +11,9 @@ import Message from "../components/front/Message.vue"
 import Test from "../components/front/Test.vue"
 import Write from "../components/front/Write.vue"
 import List from "../components/front/List.vue"
+import NotFound from "../components/front/NotFound.vue"
 
+import Logout from "../components/front/Logout.vue"
 import Login from "../components/front/Login.vue"
 import Register from "../components/front/Register.vue"
 
@@ -35,6 +37,7 @@ export default new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
+   { path: '*', component: NotFound },
     {
       path: '/',
       name: 'index',
@@ -60,11 +63,11 @@ export default new VueRouter({
         { path: '/article/:id', name: 'article', component: Article, meta: {title: '详细内容'} },
         { path: '/message', name: 'message', component: Message, meta: {title: '留言内容'} },
         { path: '/test', name: 'test', component: Test, meta: {title: '实验地'} }
-
       ]
     },
     { path: '/register', name: 'register', component: Register },
     { path: '/login', name: 'login', component: Login },
+    { path: '/logout', name: 'logout', component: Logout },
     { path: '/write', name: 'write', component: Write, meta: {title: '发表内容'} },
   ]
 });

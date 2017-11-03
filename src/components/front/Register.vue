@@ -33,8 +33,7 @@ export default {
     }
   },
   created () {
-  	
-     // alert("ok");
+
   },
   methods:{
     goBack (){
@@ -43,15 +42,17 @@ export default {
     },
     //登录
     async register () {
-      const data = await add_register(this.userinfo)
-      console.log(data)
+      console.log(this.userinfo);
+      let vm = this;
+      const data = await add_register(vm.userinfo).catch((res)=>{console.log(res)})
+
       this.callback(data)
     },
     //登陆后的回调
     callback({code,data,message}){
       if(code==1){
-        // this.$store.commit('SET_LOGIN',data)
-        // this.$router.push('/list')
+        this.$store.commit('SET_LOGIN',data)
+        this.$router.push('/list')
       }else{
         alert("错了哦");
         // this.$store.dispatch('setShowWarn',message)

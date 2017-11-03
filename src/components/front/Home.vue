@@ -5,9 +5,7 @@
      <transition name="fade">
      <router-view></router-view>
   </transition>
-    
-  
-
+    <div class="write-word"><a href="/write"><i class="fa fa-pencil"></i>发文</a></div>
 
 </div>
 </template>
@@ -30,12 +28,6 @@ export default {
     ...mapGetters(['isLogin','userInfo'])
   },
   methods: {
-  	// add () {
-  	//   this.$store.state.itemsPerPage++;
-  	// },
-  	// reduce () {
-  	// 	this.$store.state.itemsPerPage--;
-  	// }
     loginInfo(){
       if(!this.isLogin){
         this.$router.push('/login')
@@ -88,6 +80,24 @@ export default {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
 }*/
+.write-word{
+  position: fixed;
+  right: 10px;
+  bottom: 50px;
+  padding:2px;
+  /*background: #fff;*/
+}
+.write-word a{
+  padding:5px 10px;
+  background: #0095ea;
+  color:#fff;
+  border-radius: 5px;
+  font-size:15px;
+  -webkit-border-radius: 5px;
+}
+.write-word a i{
+  margin-right: 8px;
+}
 .banner{
   /*max-width: 1024px;*/
   width:100%;
