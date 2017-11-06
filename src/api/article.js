@@ -2,7 +2,7 @@ import encrypt from '../common/encrypt'
 import { request_get,request_post } from '../common/request'
 
 //登录接口
-const API_CONFIG = 'http://localhost:3000/api/article'
+const API_CONFIG = 'http://127.0.0.1:8010/api/article'
 
 /**
  * [addarticle 上传文章]

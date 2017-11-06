@@ -14,13 +14,14 @@ const apiRouter = require('./api')
 const app = express()
 app.use(express.static(path.join(__dirname,'static')))
 const server = http.createServer(app)
-server.listen(3000)
+server.listen(8010)
 
 // 解析表单post数据
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
-app.use(bodyParser.json())
+
 
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

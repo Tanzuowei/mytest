@@ -30,12 +30,12 @@ export default {
     }
   },
   created(){
-    if(!this.isLogin && !this.isNumber(parseInt(this.$route.params.id))){
-      let that = this
-      setTimeout(function(){that.$router.replace({name: 'login'})},10)
-    }else{
+    // if(!this.isLogin && !this.isNumber(parseInt(this.$route.params.id))){
+    //   let that = this
+    //   setTimeout(function(){that.$router.replace({name: 'login'})},10)
+    // }else{
       
-    }
+    // }
   },
   mounted(){
     let vm = this

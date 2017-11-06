@@ -2,8 +2,8 @@
   <li class="news-item clearfix" v-if="items">
     <a class="post-item" :href="'/article/'+items.id">
     <div class="item-top">
-      <a :href="'/user/'+items.users_id" class="head-url"><img src="/static/images/mypic.jpg"></a>
-      <a :href="'/user/'+items.users_id" class="user-name">{{items.users_name}}</a><span>{{items.addtime}}</span>
+      <a href="/user" class="head-url"><img src="/static/images/mypic.jpg"></a>
+      <a href="/user" class="user-name">{{items.users_name}}</a><span>{{items.addtime}}</span>
     </div>
     <div class="item-content">
     <!--   <div class="item-img" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/7264867-5b31ec396d927319.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/690/h/240&quot;);"></div> -->

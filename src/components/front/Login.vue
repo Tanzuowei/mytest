@@ -83,7 +83,7 @@ export default {
 }
 .login{
   padding:0 15px;
-  height:400px;
+  /*height:400px;*/
   margin:0 auto;
   overflow: hidden;
 }

@@ -19,18 +19,19 @@
       </div>
     </form>
     </div>-->
-   <alist>
+ <!--   <alist>
     <slot>
     只有在没有要分发的内容时才会显示。
-  </slot>
+  </slot> -->
 </alist>
+<picker :testValue="80"></picker>
     <div class="comments-text">目前还未添加</div>
   </div> 
 </div>
 </template>
 
 <script>
-import alist from "./AAd.vue";
+// import alist from "./picker.vue";
 export default {
   data () {
     return {
@@ -38,11 +39,14 @@ export default {
     }
   },
   components: {
-    alist
+    // alist
   },
   created () {
   },
   mounted(){
+    // window.addEventListener("load",function(){
+      
+    // })
 
   },
   computed: {
@@ -106,11 +110,8 @@ export default {
   border:1px solid #0895fd;
   color:#fff;
   font-size: 14px;
-  /*display: inline-block;*/
 }
 .text-r{
-      /*justify-content: right;*/
-  /*text-align: right;*/
 }
 .comment-context{
     width: 100%;

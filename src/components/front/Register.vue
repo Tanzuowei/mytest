@@ -42,17 +42,17 @@ export default {
     },
     //登录
     async register () {
-      console.log(this.userinfo);
+      // console.log(this.userinfo);
       let vm = this;
-      const data = await add_register(vm.userinfo).catch((res)=>{console.log(res)})
-
+      const data = await add_register({...vm.userinfo})
+      console.log(data)
       this.callback(data)
     },
     //登陆后的回调
     callback({code,data,message}){
       if(code==1){
         this.$store.commit('SET_LOGIN',data)
-        this.$router.push('/list')
+        this.$router.push('/blog')
       }else{
         alert("错了哦");
         // this.$store.dispatch('setShowWarn',message)

@@ -12,6 +12,14 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted(){
+  	 window.onload=function(){
+    		// alert("ok");
+    		var node = document.getElementById('load')
+    		// console.log(node)
+            node.removeChild(node.childNodes[0])
+    	}
   }
 }
 </script>

@@ -1,9 +1,9 @@
 import axios from 'axios'
-
+import qs from 'qs'
 
 var instance = axios.create({
-  timeout: 1000,
-  headers: {'Content-Type':'text/html'}
+  timeout: 1000
+  // headers: {'Content-Type':'*'}
 });
 
 /**

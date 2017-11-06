@@ -2,7 +2,7 @@ import encrypt from '../common/encrypt'
 import { request_get } from '../common/request'
 
 //登录接口
-const API_CONFIG = 'http://localhost:3000/api/login'
+const API_CONFIG = 'http://127.0.0.1:8010/api/login'
 
 /**
  * [checklogin 检测登录]

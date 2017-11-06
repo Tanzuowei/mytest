@@ -1,14 +1,21 @@
 
 const register = require('../../model/login')
+function isNum(num) {
+  const reg = new RegExp(/^[0-9]/);
+  return reg.test(num);
+}
 module.exports = class Register {
    /*
      注册
    */
   static async add_register (req,res) {
-    console.log(res)
-    const { user , pwd, invitecode } = req.body
-    console.log(req.params)
+    console.log(req.method)
+    let { user,pwd,invitecode } = req.body
+    // console.log(req.params)
     console.log(user , pwd, invitecode )
+    if(isNum(invitecode)){
+      invitecode = parseInt(invitecode)
+    }
     const field = 'users_name'
     const checkUserRow = await this.checkUser(user,field)
     if(1 === checkUserRow){
@@ -17,17 +24,23 @@ module.exports = class Register {
          "message": "该用户名已存在"
        }
     }
-    if(12345!== invitecode){
+    if(12345 !== invitecode){
       return {
          "code": 2,
          "message": "邀请码错误"
        }
     }
-    const insertRow = await this.insert(user,pwd)
+    const userInfo = await this.insertInfo(user,pwd)
+    const loginStatus = {}
+    loginStatus.isLogin = 1
+    loginStatus.userId = userInfo.id
     return {
-      "code": 1,
-      "message": "注册成功",
-      "data": insertRow
+      'code': 1,
+      'message': '注册成功',
+      'data': {
+        userInfo,
+        loginStatus
+      }
     }
   }
   /*
@@ -45,7 +58,7 @@ module.exports = class Register {
      检测密码是否正确
    */
   static async checkPwd (user,field,pwd) {
-    console.log("this is mima")
+
     let rows = await register.findAll({
         where:{
           'users_name': user
@@ -57,8 +70,8 @@ module.exports = class Register {
   /*
    * sql 写入
   */
-  static async insert(user, pwd) {
-   let rows = await article.create({
+  static async insertInfo(user, pwd) {
+   let rows = await register.create({
         users_name: user,
         password: pwd,
         reg_time: Date.parse(new Date())
@@ -70,7 +83,7 @@ module.exports = class Register {
     * 检测密码是否正确
    */
   static async getUserInfo (userId) {
-    let rows = await article.findAll({
+    let rows = await register.findAll({
         users_name: user,
         password: pwd,
         reg_time: Date.parse(new Date()),

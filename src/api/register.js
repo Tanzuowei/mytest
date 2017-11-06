@@ -3,7 +3,7 @@ import {
 	request_post
 } from '../common/request'
 
-const API_CONFIG = 'http://localhost:3000/api/register'
+const API_CONFIG = 'http://127.0.0.1:8010/api/register'
 
 /**
  * [发送验证码到用户的手机]

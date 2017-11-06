@@ -13,7 +13,7 @@
 <script>
 import top from "./Top.vue";
 import { mapState, mapGetters, mapMutations } from 'vuex'
-
+import alist from "./AAd.vue";
 export default {
   data () {
     return {
